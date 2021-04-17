@@ -1,29 +1,22 @@
 ﻿using UnityEngine;
-using System.Collections;
+using DMG.Cars.Wheels;
 
 public class RearWheelDrive : MonoBehaviour {
 
-	private WheelCollider[] wheels;
+	private WheelCollider[] _wheels;
 
 	public float maxAngle = 30;
 	public float maxTorque = 300;
 	public GameObject wheelShape;
 
-	// here we find all the WheelColliders down in the hierarchy
 	public void Start()
 	{
-		wheels = GetComponentsInChildren<WheelCollider>();
+		_wheels = GetComponentsInChildren<WheelCollider>();
 
-		for (int i = 0; i < wheels.Length; ++i) 
+		foreach (var wheel in _wheels)
 		{
-			var wheel = wheels [i];
-
-			// create wheel shapes only when needed
-			if (wheelShape != null)
-			{
-				var ws = GameObject.Instantiate (wheelShape);
-				ws.transform.parent = wheel.transform;
-			}
+			var spawner = wheel.GetComponent<WheelSpawner>();
+			spawner.SpawnWheel();
 		}
 	}
 
@@ -35,7 +28,7 @@ public class RearWheelDrive : MonoBehaviour {
 		float angle = maxAngle * Input.GetAxis("Horizontal");
 		float torque = maxTorque * Input.GetAxis("Vertical");
 
-		foreach (WheelCollider wheel in wheels)
+		foreach (WheelCollider wheel in _wheels)
 		{
 			// a simple car where front wheels steer while rear ones drive
 			if (wheel.transform.localPosition.z > 0)

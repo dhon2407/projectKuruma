@@ -1,6 +1,5 @@
 ﻿using UnityEngine;
 using UnityEditor;
-using System.Collections;
 
 class BoxyCarWizard : EditorWindow {
 	private int axlesCount = 2;
@@ -11,7 +10,7 @@ class BoxyCarWizard : EditorWindow {
 
 	[MenuItem ("Vehicles/Boxy car wizard")]
 	public static void  ShowWindow () {
-		EditorWindow.GetWindow(typeof(BoxyCarWizard));
+		GetWindow(typeof(BoxyCarWizard));
 	}
 
 	void OnGUI () {
@@ -28,7 +27,7 @@ class BoxyCarWizard : EditorWindow {
 
 	void CreateCar()
 	{
-		var root = new GameObject ("carRoot");
+		var root = new GameObject ("carBase");
 		var rootBody = root.AddComponent<Rigidbody> ();
 		rootBody.mass = mass;
 
@@ -42,8 +41,8 @@ class BoxyCarWizard : EditorWindow {
 
 		for (int i = 0; i < axlesCount; ++i) 
 		{
-			var leftWheel = new GameObject (string.Format("a{0}l", i));
-			var rightWheel = new GameObject (string.Format("a{0}r", i));
+			var leftWheel = new GameObject ($"Axel{i} - Left");
+			var rightWheel = new GameObject ($"Axel{i} - Right");
 
 			leftWheel.AddComponent<WheelCollider> ();
 			rightWheel.AddComponent<WheelCollider> ();
