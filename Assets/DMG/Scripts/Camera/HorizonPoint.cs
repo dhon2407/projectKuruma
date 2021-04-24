@@ -10,6 +10,11 @@ namespace DMG.Camera
         [SerializeField]
         private float distance;
 
+        [SerializeField]
+        private float verticalOffset;
+
+        
+
         private Transform _transform;
         private Vector3 _referencePosition;
 
@@ -25,7 +30,9 @@ namespace DMG.Camera
 
         private void FixedUpdate()
         {
-            _referencePosition.z = player.position.z + distance;
+            var position = player.position;
+            _referencePosition.z = position.z + distance;
+            _referencePosition.y = position.y + verticalOffset;
             _transform.position = _referencePosition;
         }
     }

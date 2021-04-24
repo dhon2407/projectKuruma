@@ -33,7 +33,7 @@ namespace DMG.Cars.Wheels
             _wheelModel = _wheel.transform.GetChild(0);
             
             if (flipPosition)
-                _wheel.transform.GetChild(0).localRotation = Quaternion.Euler(0,180,0);
+                _wheelModel.GetChild(0).localRotation = Quaternion.Euler(0,180,0);
         }
 
         private void Update()
@@ -56,7 +56,7 @@ namespace DMG.Cars.Wheels
             modelPosition.x = wheelOffset * (flipPosition ? 1 : -1);
             _wheelModel.localPosition = modelPosition;
             _wheelModel.rotation = rotation;
-            _wheelModel.RotateAround(_wheelModel.position, Vector3.up, flipPosition ? 180 : 0);
+           //_wheelModel.RotateAround(_wheelModel.position, Vector3.up, flipPosition ? 180 : 0);
         }
 
         private void OnValidate()
