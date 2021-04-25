@@ -8,6 +8,7 @@ namespace DMG.Cars.Wheels
 
         private float _inputSteerAngle;
         private float _inputTorque;
+        private float _inputBrakeTorque;
 
         public void SetSteerAngle(float angle)
         {
@@ -17,6 +18,11 @@ namespace DMG.Cars.Wheels
         public void SetTorque(float torque)
         {
             _inputTorque = torque;
+        }
+        
+        public void SetBrakeTorque(float brakeTorque)
+        {
+            _inputBrakeTorque = brakeTorque;
         }
         
         public void Start()
@@ -39,6 +45,8 @@ namespace DMG.Cars.Wheels
 
                 if (wheel.transform.localPosition.z < 0)
                     wheel.motorTorque = _inputTorque;
+
+                wheel.brakeTorque = _inputBrakeTorque;
             }
         }
     }
