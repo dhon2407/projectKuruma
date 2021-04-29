@@ -48,7 +48,7 @@ namespace DMG.Cars
             _inputHandler = GetComponentInChildren<IInputHandler>();
         }
 
-        private void Update()
+        protected virtual void Update()
         {
             CheckInputs();
             UpdateCarParameters();

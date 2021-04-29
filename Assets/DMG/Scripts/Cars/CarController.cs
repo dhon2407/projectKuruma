@@ -1,9 +1,15 @@
 using DMG.UI.HUD;
+using DMG.Weapon;
+using UnityEngine;
 
 namespace DMG.Cars
 {
     public class CarController : VehicleController
     {
+        [SerializeField]
+        private BasicGun gun;
+
+        
         public override float Speed
         {
             get => _speed;
@@ -29,6 +35,13 @@ namespace DMG.Cars
         {
             base.UpdateCarParameters();
             _powerMeter.SetPowerRate(TargetTorque / maxTorque);
+        }
+
+        protected override void Update()
+        {
+            base.Update();
+            if (Input.GetKeyDown(KeyCode.R))
+                gun.Fire();
         }
     }
 }
